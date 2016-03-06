@@ -32,7 +32,7 @@ before_cache:
 after_success:
 - polysquare_run coverage/cmake/coverage.py
 before_deploy:
-- polysquare_run before_deploy.py --package=cmake-include-guard
+- polysquare_run deploy/conan/before_deploy.py --package=cmake-include-guard
 deploy:
   provider: script
   skip_cleanup: true
