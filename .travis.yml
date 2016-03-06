@@ -1,0 +1,43 @@
+language: cpp
+sudo: false
+cache:
+  directories:
+  - container
+env:
+  matrix:
+  - CMAKE_GENERATOR="Unix Makefiles" CMAKE_VERSION="latest" DEPLOY="1"
+  - CMAKE_GENERATOR="Ninja" CMAKE_VERSION="latest"
+  - CMAKE_GENERATOR="Unix Makefiles" CMAKE_VERSION="3.0"
+  - CMAKE_GENERATOR="Ninja" CMAKE_VERSION="3.0"
+  - CMAKE_GENERATOR="Unix Makefiles" CMAKE_VERSION="latest" COVERAGE="--use-cmake-coverage"
+  global:
+  - secure: EhFHG0bB84ttyt/vTWmkn2y54WFE2X07JjLk4yW3jSlKy6i2sKb7ALXxNBUzTYt7yB4u687okFvDElrPVeitUPBR4p/a+veWg128ELGDfJUrWIfc5h8CnEoGy4Kc7wBBpQ/YU6ZYhSkDLAZOK2WV3swhqs4oRleGhWm2m7LOmH4JzT/hcH8cgIvdpknFFwYV/9eVWR5gZRQ0sHoy1Sqd0x/dZgagRS5l5X1lN38Xph7b+JgHwd8gmhIhaHbYPrtFNfp6Pk/U2J4jLVqZexnBxt0PwS0Sfx+Xl2qiPYQqhZhJ6lzf8EE1orzHfZaynay4c+t6AXXR2ldJqGoPxIHg4z2w6pBYHBmPstlsd/c2oW6WfcI7AUbpoazNGmqLU7sWTq6vT+G+fQbPN/QNrHLxS4N86nXYoGAYs1oeGOjPF47a3JwwwIqzYIPTGwxXNvDWvjG8CCq9rhJV0PvQWS4NlLdMUKj3GwVxtRN6E8+4N3hi1lPs80gjmiOXPSkbFB7vrvLnhslUWkDL1szOPoAx0qGU0GBgRMLXyeU0lBiAgvF5JTesJlnI7twhNaBrsycqnmxttdQAj/SpGJrTIVA1AV086LHrm5sugKEEBbrr2EhYNyq6Jbv+aCrZ/qVbWsaFMeg1tA0mwtg9LrVusUv1nppW9JhtSp7BjBghxjyR5fc=
+  - secure: gzLTkmqvZUG4AUYBuq++PJWsVx8nJ5bk2FN1IOYx1WorFVObDpqMlTls1lsL186uSjPF7UJRheeGmiovepweOE2DY+Z0UgcbOiodZDUIL7FJ+PDgcug19epRNFJCvLXXHXSy6qX2ViwyPccpaUzhC4uBB2HbLMOTSQREihrfi3/IdfwEGYyEWdY+Q+lOYRSfRrhGHBGOOdglHjMLlHrU9EnoqVKbsfJlmyBVW+RSLsqXJojbiFO8MtwpNOnBPB0vq4jjnbg9w84fBl2zfMHOoyYRrdXaVuBZTe5dWis/cZwYn1ybuQ2Xg7dPtLmKjINy450/ZI+sCsdaH5ApO/qdGYrV3QHZaEt7qUNRNaNWToOYKiR1+lpuL6piJHWccQ+UEH1clMtsK8tRAz0D8t+Fzw0z8jD9OVo44SfahNxpQNdxPW3yDqgf2r2M1zCqO3QiM1fjSc3yxEBRd4P4tDALljIOYZL9low/uyYuExYFBwnWN6Avaac7HtLFWeH27cXJx8tll3NsreHW4TW7dtK8MIvqNuykL0Bsx4UuQeEcBVfYLzSF/04tW8xlnDEAjVVzcp0HY/VTDQmBlhs1FDwCC5YtqFXayZ/4yAEmMMSkcH6XqpQw2tc8KlRYo5pIK7y+3LE08YOg9/Gf3PMjgEiaR08FoawTNfRXA9S4I32rOcY=
+  - secure: aIbdEp83VkARQvY1SG2GEUA7VWWD83nY9+JJqVtv3IUsy4WjIAhVcLhlMBAUFY/rMHEUqKShqHA/otSMC7OQhdkquv4XrGYsruQ3CcZrlNm1CpglAHY9ShEQjBRf2NvGhtJsBTQBE6vUDZ/C9IThxzip49007Dk04WFjGkxBtWP6Onega5J1gLw/AR4NhatorfzWxQvwIDxaN5rSMykOhfhKxn6Fp7MpC99hrKKyPXlySkP9by45Y690BgM7WKNWhAccFf2D06xRtZh7OH64H2oSAb6/EAgTloKJX1H+XCbADEJviiELMcCS2QluU+XlOpostEe1xvv6H1SPxePLKcNRsMWnXmtYDyUw+rhp4cgWksxsr5ZvweSqDuTIVacvqRR9L42BOyLBjse8m0MTxUyJyzwgrc67l+yzW/w37goToftHomFFUiS1m0SclXtFeybn3szpqwErC1enWvwJU3JdfIGipGzokN5aeuYSvnmJ1WQKJBl0K8FgWFB2BkYAG7TJTRH2k2Vtx6DKEM1+9QZM0M1Jl4bN9JFF4NmLZYempYOS2tzsAdu71oeifc750Vuysp2RI5RseTcwExFuBtfBxxwlPi2Nw7ztw/YznUmtzdmOcCWP0Rlbe9wOeatl4Mr7S+vak8R+dYNxv+hMT6k2SG9AmzZ64NxjbuGb5Js=
+addons:
+  apt:
+    sources:
+    - deadsnakes
+    packages:
+    - python3.4-dev
+install:
+- eval $(curl -LSs --retry 100 --connect-timeout 3 public-travis-scripts.polysquare.org/bootstrap.py
+  | python /dev/stdin -d container -s setup/conan/setup.py -e bash -p /dev/stdout
+  --cmake-version ${CMAKE_VERSION})
+script:
+- polysquare_run check/conan/check.py ${COVERAGE} --cmake-namespace cmake --generator
+  "${CMAKE_GENERATOR}"
+before_cache:
+- polysquare_cleanup
+after_success:
+- polysquare_run coverage/cmake/coverage.py
+before_deploy:
+- polysquare_run before_deploy.py --package=cmake-include-guard
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: "./travis-deploy"
+  on:
+    repo: polysquare/cmake-include-guard
+    branch: master
+    condition: "${DEPLOY} = 1"
