@@ -8,10 +8,17 @@ VERSION = "0.1.2"
 class CMakeIncludeGuardConan(ConanFile):
     name = "cmake-include-guard"
     version = os.environ.get("CONAN_VERSION_OVERRIDE", VERSION)
-    requires = ("cmake-module-common/master@smspillaz/cmake-module-common", )
     generators = "cmake"
     url = "http://github.com/polysquare/cmake-include-guard"
     licence = "MIT"
+    options = {
+        "dev": [True, False]
+    }
+    default_options = "dev=False"
+
+    def requirements(self):
+        if self.options.dev:
+            self.requires("cmake-module-common/master@smspillaz/cmake-module-common")
 
     def source(self):
         zip_name = "cmake-include-guard.zip"
