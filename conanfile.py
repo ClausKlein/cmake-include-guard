@@ -2,7 +2,7 @@ from conans import ConanFile
 from conans.tools import download, unzip
 import os
 
-VERSION = "0.1.2"
+VERSION = "0.1.3"
 
 
 class CMakeIncludeGuardConan(ConanFile):
