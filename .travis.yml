@@ -50,3 +50,4 @@ deploy:
     repo: polysquare/cmake-include-guard
     branch: master
     condition: "${DEPLOY} = 1"
+
